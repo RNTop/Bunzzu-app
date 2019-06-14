@@ -36,9 +36,13 @@ export const DefaultStyles = StyleSheet.create({
     fontSize: 14,
     margin: 10
   },
-  logo:{
-  marginTop:200,
-  height:150,
-  width:150
+  logo: {
+    marginTop: 200,
+    height: 150,
+    width: 150
+  },
+  homeLogo: {   
+    height: 150,
+    width: 150
   },
 });

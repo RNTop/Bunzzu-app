@@ -1,12 +1,12 @@
-import { AsyncStorage } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 
 const StorageKeys = {
-  USER_ID: "userId"
+  UserInfo: "UserInfo"   // This is same with the response of login API->id, masterId,username, appLogo ,email, response
 };
 
-async function saveItem(key, value) {
+const  saveItem =(key, value)=> {
   try {
-    await AsyncStorage.setItem(key, value).then();
+     AsyncStorage.setItem(key, value).then();
     return true;
   } catch (error) {
     console.log("Error saving data");
@@ -14,7 +14,7 @@ async function saveItem(key, value) {
   }
 }
 
-async function removeItem(key) {
+const removeItem=async(key)=> {
   try {
     await AsyncStorage.removeItem(key);
     return true;
@@ -23,16 +23,11 @@ async function removeItem(key) {
   }
 }
 
-async function getItem(key) {
+const  getItem=async(key)=> {
   try {
-    const value = await AsyncStorage.getItem(key);
-    if (value !== null) {
-      return value;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.log(error);
+    await AsyncStorage.getItem(key);
+    return true;
+  } catch (exception) {
     return false;
   }
 }

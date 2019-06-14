@@ -1,18 +1,18 @@
 import Color from "../../styles/colors"
 export default ({
-    container: {
-		flex:1,
+	container: {
+		flex: 1,
 		justifyContent: "space-evenly",
 		alignItems: "center",
 		backgroundColor: Color.BACKGROUND_COLOR,
-		resizeMode:'contain'
-	},	
+		resizeMode: 'contain'
+	},
 	authBox: {
-		flex:4,		
+		flex: 4,
 		justifyContent: "center",
-	    alignItems: "center",		
+		alignItems: "center",
 		backgroundColor: Color.BACKGROUND_WHITE,
-		width:'100%',
+		width: '100%',
 	},
 	authBtn: {
 		backgroundColor: Color.PRIMARY_COLOR,
@@ -22,15 +22,15 @@ export default ({
 		alignItems: "center",
 		borderRadius: 25,
 		margin: 10,
-    },
-    btnText:{
-        color:Color.BACKGROUND_WHITE,
-        fontWeight:'bold',
-        fontSize:20
 	},
-	animationBox:{		
-		flex:6,	
-		alignItems:'center',
-		justifyContent:"center"
+	btnText: {
+		color: Color.BACKGROUND_WHITE,
+		fontWeight: 'bold',
+		fontSize: 20
+	},
+	animationBox: {
+		flex: 6,
+		alignItems: 'center',
+		justifyContent: "center"
 	}
 });

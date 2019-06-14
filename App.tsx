@@ -7,6 +7,8 @@ import reducers from "./src/redux/reducer/index";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import LoginPage from "./src/modules/login/LoginPage";
 import HomePage from "./src/modules/home";
+import QrScannerPage from "./src/modules/qrcodescanner";
+
 import NavigationService from "./src/navigation/NavigationService";
 import Color from "./src/styles/colors";
 
@@ -34,6 +36,12 @@ const RootStack = createStackNavigator(
 		},
 		Home: {
 			screen: HomePage,
+			navigationOptions: {
+				header: null
+			}
+		},
+		QrScanner:{
+			screen: QrScannerPage,
 			navigationOptions: {
 				header: null
 			}

@@ -17,37 +17,76 @@ import {
 	SkypeIndicator,
 	UIActivityIndicator
 } from 'react-native-indicators';
-import InputItem from "@components/InputItem"
+import {Icon,Content,Card, Thumbnail, Title} from 'native-base'
+import UserModal from "@components/UserModal"
 import Color from "../../styles/colors"
 import { DefaultStyles } from "../../styles/styles"
 import styles from "./styles"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from "../../redux/action.js"
+import StorageHelper from "../../helpers/StorageHelper";
+import AsyncStorage from '@react-native-community/async-storage';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
     state = {
 
     };
     componentDidMount() {
+    
+    }
+    givePoints(){
+     this.props.qrcodeScan('givePoints')
+    }
+    claimRewards(){
 
     }
-
+    async applogout() {		
+		await AsyncStorage.removeItem(StorageHelper.StorageKeys.UserInfo)
+		this.props.logout();		
+	}
     public render() {
-
-
+       let {username,email,appLogo}=this.props.UserInfo
         return (
-            <View style={styles.container}>
-                <Image
-                    source={LogoUrl}
-                    style={[DefaultStyles.logo]}
-                />
+            <ImageBackground 
+			 style={styles.container}
+			 source={AppBackgroundImage}			
+			>              
+            <View style={{flex:2,width:'100%'}}>
+                <Icon   
+                type={"MaterialCommunityIcons"} name={'logout'}           
+                style={styles.logout}
+                onPress={()=>this.applogout()}
+                /> 
             </View>
+            <View style={styles.mainContent}>
+              <UserModal  
+               avatar={appLogo}
+               username={username}
+               email={"ivansantiagouk2gmail.com"}  
+               onPress={()=>{alert('here')}}        
+              />
+              <TouchableOpacity 
+              style={[styles.cardTheme,{flex:4,justifyContent:'center',alignItems:'center'}]}
+              onPress={()=>{this.givePoints()}}
+              >  
+                <Text style={{fontSize:30,color:Color.PRIMARY_COLOR}}>Give Points</Text>      
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.cardTheme,{flex:4,marginBottom:100,justifyContent:'center',alignItems:'center'}]}>                  
+                <Text style={{fontSize:30,color:Color.PRIMARY_COLOR}}>Claim rewards</Text>    
+             </TouchableOpacity>
+            </View>
+            </ImageBackground>
         );
     }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-// 	return bindActionCreators(ActionCreators, dispatch)
-//   }
-// export default connect(null, mapDispatchToProps)(LoginPage)
+const mapStateToProps = ({auth,qrData}) => {
+    return {
+        UserInfo: auth.user,
+        ScanedValue:qrData
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators(ActionCreators, dispatch)
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

@@ -35,7 +35,7 @@ export const AuthReducer = (
 				...state,
 				loading: false,
 				loginCompleted: true,
-				userLoggedId: action.payload.id
+				user: action.payload
 			};
 
 		case AuthActionTypes.LOGIN_USER_FAIL:

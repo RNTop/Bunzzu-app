@@ -24,10 +24,12 @@ import styles from "./styles"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from "../../redux/action.js"
+import StorageHelper from "../../helpers/StorageHelper";
+import AsyncStorage from '@react-native-community/async-storage';
  class LoginPage extends Component {
 	state = {
-		email:'',
-		password:'',
+		email:'',//'ivan.santiagouk@gmail.com',
+		password:'',//'trattoria',
 		loading: true,		
 		loginModalVisible: false,
 		registerModalVisible: false,
@@ -35,13 +37,16 @@ import { ActionCreators } from "../../redux/action.js"
 		fadeAnim:new Animated.Value(0),
 		indCatorVisible: "flex"
 	};
-	componentDidMount() {
-		
+	componentDidMount() {		
 		this.intervalId = setInterval(() => {
 			this.setTimePassed();
 		}, 3000);
 	}
-	setTimePassed() {
+	 async setTimePassed() {		
+		const UserInfo= await AsyncStorage.getItem(StorageHelper.StorageKeys.UserInfo)		
+		if(UserInfo){
+			this.props.autoLogin(JSON.parse(UserInfo));
+		}
 		this.setState({ loading: false })
 		this.logoAnimation()
 		clearInterval(this.intervalId);

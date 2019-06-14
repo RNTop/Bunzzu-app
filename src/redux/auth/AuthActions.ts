@@ -17,7 +17,7 @@ export const loginUser = ({ email, password }) => {
 			.then(res => {
 								
 				if (res.data.response == "OK") {					
-					loginUserSuccess(dispatch, res.data);
+					loginUserSuccess(dispatch,res.data);					
 				} else {
 					loginUserFail(dispatch, res.data.Error);
 					alert(res.data.Error)
@@ -41,10 +41,31 @@ const loginUserFail = (dispatch, errorMessage) => {
 };
 
 const loginUserSuccess = (dispatch, data) => {
-	StorageHelper.saveItem(StorageHelper.StorageKeys.USER_ID, data.id);
+	StorageHelper.saveItem(StorageHelper.StorageKeys.UserInfo,JSON.stringify(data))
 	NavigationService.navigateAndReset("Home");
 	dispatch({
 		type: AuthActionTypes.LOGIN_USER_SUCCESS,
 		payload: data
 	});
+};
+
+
+export const autoLogin = (data) => {	
+	NavigationService.navigateAndReset("Home");
+	return dispatch => {
+		dispatch({
+			type: AuthActionTypes.LOGIN_USER_SUCCESS,
+			payload: data
+		});
+	};
+};
+
+export const logout = () => {
+	NavigationService.navigateAndReset("Login");	
+	return dispatch => {
+		dispatch({
+			type: AuthActionTypes.LOGIN_USER_FAIL,
+			payload: "There was an error connection"
+		});
+	};
 };
