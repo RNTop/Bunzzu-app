@@ -1,18 +1,19 @@
 import Color from "../../styles/colors"
 export default ({
-	container: {
-		flex: 1,
-		justifyContent: "space-evenly",
+	container: {		
+		flex:1,
 		alignItems: "center",
 		backgroundColor: Color.BACKGROUND_COLOR,
-		resizeMode: 'contain'
+		resizeMode: 'contain',
+		justifyContent: "center",
 	},
 	authBox: {
-		flex: 4,
+		flex: 4,		
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: Color.BACKGROUND_WHITE,
+		backgroundColor:Color.BACKGROUND_WHITE,
 		width: '100%',
+		
 	},
 	authBtn: {
 		backgroundColor: Color.PRIMARY_COLOR,
@@ -29,8 +30,8 @@ export default ({
 		fontSize: 20
 	},
 	animationBox: {
-		flex: 6,
+		flex: 6,		
 		alignItems: 'center',
-		justifyContent: "center"
+		justifyContent: "center",		
 	}
 });

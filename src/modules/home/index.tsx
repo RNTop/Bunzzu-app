@@ -11,7 +11,7 @@ import {
 	ImageBackground
 } from "react-native";
 import {
-	LogoUrl,AppBackgroundImage
+	LogoUrl,AppBackgroundImage,ButtonImage
 } from "../../constant/index";
 import {
 	SkypeIndicator,
@@ -35,16 +35,11 @@ class HomePage extends Component {
     componentDidMount() {
     
     }
-    givePoints(){
-     this.props.qrcodeScan('givePoints')
-    }
-    claimRewards(){
-
-    }
+    
     async applogout() {		
-		await AsyncStorage.removeItem(StorageHelper.StorageKeys.UserInfo)
-		this.props.logout();		
-	}
+      await AsyncStorage.removeItem(StorageHelper.StorageKeys.UserInfo)
+      this.props.logout();		
+	  }
     public render() {
        let {username,email,appLogo}=this.props.UserInfo
         return (
@@ -67,13 +62,16 @@ class HomePage extends Component {
                onPress={()=>{alert('here')}}        
               />
               <TouchableOpacity 
-              style={[styles.cardTheme,{flex:4,justifyContent:'center',alignItems:'center'}]}
-              onPress={()=>{this.givePoints()}}
-              >  
-                <Text style={{fontSize:30,color:Color.PRIMARY_COLOR}}>Give Points</Text>      
+              style={[styles.cardTheme,{flex:4,justifyContent:'center',alignItems:'center',backgroundColor:Color.PRIMARY_COLOR}]}
+              onPress={()=>{this.props.qrcodeScan('givePoints')}}
+              >          
+               <Text style={{fontSize:30,color:Color.BACKGROUND_WHITE,fontWeight:'bold'}}>Give Points</Text>                           
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.cardTheme,{flex:4,marginBottom:100,justifyContent:'center',alignItems:'center'}]}>                  
-                <Text style={{fontSize:30,color:Color.PRIMARY_COLOR}}>Claim rewards</Text>    
+              <TouchableOpacity 
+              style={[styles.cardTheme,{flex:4,marginBottom:100,justifyContent:'center',alignItems:'center',backgroundColor:Color.PRIMARY_COLOR}]}
+              onPress={()=>{this.props.qrcodeScan('claimReward')}}
+              >                  
+                <Text style={{fontSize:30,color:Color.BACKGROUND_WHITE,fontWeight:'bold'}}>Redeem rewards</Text>                 
              </TouchableOpacity>
             </View>
             </ImageBackground>

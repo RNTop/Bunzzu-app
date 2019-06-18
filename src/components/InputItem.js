@@ -34,7 +34,7 @@ export default class InputItem extends Component {
                     underlineColorAndroid="transparent"
                     placeholder={placeholder}
                     placeholderTextColor={Color.PRIMARY_COLOR}
-                    autoCapitalize="none"             
+                    autoCapitalize="none"                           
                     onChangeText={(text)=>{onChangeText(text)}}
                     value={value}
                     /> 

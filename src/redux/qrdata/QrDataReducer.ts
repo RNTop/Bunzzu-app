@@ -1,10 +1,19 @@
 import { QrDataState } from "./QrDataState";
 import { QrDataActionTypes } from "./QrDataActionTypes";
 const INITIAL_STATE: QrDataState = {
-    QrData:{
-        GivePoints: "g",
-	    ClamimRewards: "c",
-    },
+	QrData: {
+		GivePoints: {
+			descMessage: "",
+			titleMessage: "",
+			qrcodeId: 0,
+			points: 0
+		},
+		ClamimRewards: {
+			descMessage: "",
+			titleMessage: "",
+			qrcodeId: 0
+		}
+	},
 	loading: false,
 	error: false,
 	errorMessage: ""
@@ -28,13 +37,33 @@ export const QrDataReducer = (
 				errorMessage: ""
 			};
 
-		case QrDataActionTypes.QR_SCAN_SUCCESS:
+		case QrDataActionTypes.ClamimRewardsSuccess:
 			return {
 				...state,
-				loading: false,				
+				loading: false,
 				QrData: action.payload
 			};
+		case QrDataActionTypes.ClamimRewardsFail:
+			return {
+				...state,
+				error: true,
+				loading: false,
+				errorMessage: action.payload.errorMessage
+			};
 
+		case QrDataActionTypes.GivePointsSuccess:
+			return {
+				...state,
+				loading: false,
+				QrData: action.payload
+			};
+		case QrDataActionTypes.GivePointsFail:
+			return {
+				...state,
+				error: true,
+				loading: false,
+				errorMessage: action.payload.errorMessage
+			};
 		case QrDataActionTypes.QR_SCAN_FAIL:
 			return {
 				...state,

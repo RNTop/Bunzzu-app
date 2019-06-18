@@ -1,5 +1,5 @@
 export interface User {
-	userId: number;
+	id: number;
 	masterId: number;
 	username: string;
 	appLogo: string;

@@ -2,13 +2,13 @@ import { AuthState } from "./AuthState";
 import { AuthActionTypes } from "./AuthActionTypes";
 const INITIAL_STATE: AuthState = {
 	user: {
-		userId: 0,
+		id: 0,
 		masterId: 0,
 		username: "",
-		logo: ""
+		appLogo: ""
 	},
 	loading: false,
-	error: false,
+	error: false,	
 	errorMessage: ""
 };
 

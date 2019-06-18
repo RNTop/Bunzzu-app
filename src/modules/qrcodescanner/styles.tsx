@@ -10,11 +10,29 @@ export default ({
 		backgroundColor: Color.BACKGROUND_COLOR,
 		resizeMode: 'contain'
     },
-    cancelText:{
+    cancelText:{      
         color:Color.BACKGROUND_WHITE,
+        fontSize:14,
+        marginTop:Platform.OS === 'ios' ? ((height>810||width>810)?40:25): 5,
+        width:'90%',
+        zIndex:100,
+        position:'absolute',
+        height:25
+    },
+    iteminput:{
+        zIndex:100,
+        width:250,
+        height:50,       
+        textAlign:'center',
         fontSize:20,
-        margin:10,
-        width:'90%'
+        borderColor:Color.BACKGROUND_WHITE,
+        borderWidth:1,
+        borderRadius:25,
+        paddingLeft:25,
+        paddingRight:25,
+        color:Color.BACKGROUND_WHITE,
+        marginTop:Platform.OS === 'ios' ? ((height>810||width>810)?65:50): 30,
+        position:'absolute'        
     }
 	
 });
