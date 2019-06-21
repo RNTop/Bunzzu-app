@@ -16,7 +16,7 @@ const INITIAL_STATE: EditProfileState = {
         postcode:"",
         website:"",
         facebook:"",
-        instegram:"",
+        instagram:"",
         google:"",
         twitter:"",	
     },
@@ -43,6 +43,15 @@ const INITIAL_STATE: EditProfileState = {
     isCompleted:false,   
     isBasicInfoSubmiting:false ,
     isBasicInfoSubmited:false,
+
+    isLocationInfoSubmiting:false,
+    isLocationInfoSubmited:false,
+
+    isSocialInfoSubmiting:false,
+    isSocialInfoSubmited:false,
+
+    isChangePasswordSubmiting:false,
+    isChangePasswordSubmited:false,
 };
 
 interface Action {
@@ -81,58 +90,85 @@ export const EditProfileReducer = (
                 isCompleted:false,
 				errorMessage: action.payload.errorMessage
             };
-        case EditProfileActionTypes.EDIT_USER_COUNTRY_CODE_CHANGED:
-             let CountryCodeupdatedUser=state.user
-             CountryCodeupdatedUser.countryCode=action.payload
-        return {
-            ...state,
-            user:CountryCodeupdatedUser
-            };
-        case EditProfileActionTypes.EDIT_USER_NAME_CHANGED:
-            let NameupdatedUser=state.user
-            NameupdatedUser.name=action.payload
-        return {
-           ...state,
-           user:NameupdatedUser
-           };
-        case EditProfileActionTypes.EDIT_USER_PHONE_CHANGED:
-           let PhoneupdatedUser=state.user
-           PhoneupdatedUser.phone=action.payload
-        return {
-          ...state,
-          user:PhoneupdatedUser
-          };
-        case EditProfileActionTypes.EDIT_USER_EMAIL_CHANGED:
-          let EmailupdatedUser=state.user
-          EmailupdatedUser.email=action.payload
-        return {
-         ...state,
-         user:EmailupdatedUser
-         }; 
+        case EditProfileActionTypes.EDIT_USER_INFO_CHANGED:             
+            return {
+                ...state,
+                user:action.payload
+                };        
         case EditProfileActionTypes.BASIC_INFO_SUBMIT_START:         
-        return {
-         ...state,
-         isBasicInfoSubmited:false,
-        isBasicInfoSubmiting:true
-         };
+            return {
+            ...state,
+            isBasicInfoSubmited:false,
+            isBasicInfoSubmiting:true
+            };
         case EditProfileActionTypes.BASIC_INFO_SUBMIT_SUCCESS:         
-        return {
-         ...state,
-         isBasicInfoSubmiting:false,
-         isBasicInfoSubmited:true
-         }; 
+            return {
+            ...state,
+            isBasicInfoSubmiting:false,
+            isBasicInfoSubmited:true
+            }; 
         case EditProfileActionTypes.BASIC_INFO_SUBMIT_FAIL:         
-        return {
-         ...state,
-         isBasicInfoSubmiting:false,
-         isBasicInfoSubmited:false
-         };   
-            
-         
-          
-           
-            
-		default:
+            return {
+            ...state,
+            isBasicInfoSubmiting:false,
+            isBasicInfoSubmited:false
+            }; 
+        case EditProfileActionTypes.LOCATION_INFO_SUBMIT_START:         
+            return {
+            ...state,
+            isLocationInfoSubmiting:true,
+            isLocationInfoSubmited:false
+        }; 
+        case EditProfileActionTypes.LOCATION_INFO_SUBMIT_SUCCESS:         
+            return {
+            ...state,
+            isLocationInfoSubmiting:false,
+            isLocationInfoSubmited:true
+            }; 
+        case EditProfileActionTypes.LOCATION_INFO_SUBMIT_FAIL:         
+            return {
+            ...state,
+            isLocationInfoSubmiting:false,
+            isLocationInfoSubmited:false
+            }; 
+        case EditProfileActionTypes.SOCIAL_INFO_SUBMIT_START:         
+            return {
+            ...state,
+            isSocialInfoSubmiting:true,
+            isSocialInfoSubmited:false
+        }; 
+        case EditProfileActionTypes.SOCIAL_INFO_SUBMIT_SUCCESS:         
+            return {
+            ...state,
+            isSocialInfoSubmiting:false,
+            isSocialInfoSubmited:true
+            }; 
+        case EditProfileActionTypes.SOCIAL_INFO_SUBMIT_FAIL:         
+            return {
+            ...state,
+            isSocialInfoSubmiting:false,
+            isSocialInfoSubmited:false
+            };
+                
+        case EditProfileActionTypes.CHANGE_PASSWORD_SUBMIT_START:         
+            return {
+            ...state,
+            isChangePasswordSubmiting:true,
+            isChangePasswordSubmited:false
+            }; 
+        case EditProfileActionTypes.CHANGE_PASSWORD_SUBMIT_SUCCESS:         
+            return {
+            ...state,
+            isChangePasswordSubmiting:false,
+            isChangePasswordSubmited:true
+            }; 
+        case EditProfileActionTypes.CHANGE_PASSWORD_SUBMIT_FAIL:         
+            return {
+            ...state,
+            isChangePasswordSubmiting:false,
+            isChangePasswordSubmited:false
+            };  
+        default:
 			return state;
 	}
 };

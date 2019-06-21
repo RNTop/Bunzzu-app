@@ -9,7 +9,17 @@ export interface EditProfileState {
 	error: boolean;
     errorMessage: string;
     isCompleted:boolean;
+
     isBasicInfoSubmiting:boolean;
-    isBasicInfoSubmited:boolean
+    isBasicInfoSubmited:boolean;
+
+    isLocationInfoSubmiting:boolean;
+    isLocationInfoSubmited:boolean;
+
+    isSocialInfoSubmiting:boolean;
+    isSocialInfoSubmited:boolean;
+
+    isChangePasswordSubmiting:boolean;
+    isChangePasswordSubmited:boolean;
     
 }

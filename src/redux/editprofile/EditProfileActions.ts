@@ -50,35 +50,11 @@ const EditUserBasicInfoSuccess = (dispatch, data) => {
 		payload: data
 	});
 };
-export const nameChanged = (code) => {	
+export const userInfoChanged = (newuser) => {		
 	return dispatch => {
 		dispatch({ 
-            type:EditProfileActionTypes.EDIT_USER_NAME_CHANGED ,
-            payload:code
-        });		
-	};
-};
-export const countryCodeChanged = (code) => {	
-	return dispatch => {
-		dispatch({ 
-            type:EditProfileActionTypes.EDIT_USER_COUNTRY_CODE_CHANGED ,
-            payload:code
-        });		
-	};
-};
-export const emailChanged = (code) => {	
-	return dispatch => {
-		dispatch({ 
-            type:EditProfileActionTypes.EDIT_USER_EMAIL_CHANGED ,
-            payload:code
-        });		
-	};
-};
-export const phoneChanged = (code) => {	
-	return dispatch => {
-		dispatch({ 
-            type:EditProfileActionTypes.EDIT_USER_PHONE_CHANGED ,
-            payload:code
+            type:EditProfileActionTypes.EDIT_USER_INFO_CHANGED ,
+            payload:newuser
         });		
 	};
 };
@@ -109,7 +85,6 @@ export const basicInfoSubmit = (user) => {
 	};
 };
 
-
 const basicInfoSubmitFail = (dispatch) => {
 	dispatch({type: EditProfileActionTypes.BASIC_INFO_SUBMIT_FAIL });
 };
@@ -117,6 +92,94 @@ const basicInfoSubmitFail = (dispatch) => {
 const basicInfoSubmitSuccess = (dispatch) => {	
 	dispatch({type: EditProfileActionTypes.BASIC_INFO_SUBMIT_SUCCESS });
 };
+export const locationInfoSubmit = (user) => {	
+	return dispatch=>{
+		dispatch({ type:EditProfileActionTypes.LOCATION_INFO_SUBMIT_START });	
+		let {id,address,postcode}=	user
+		const	locationurl="http://api.postcodes.io/postcodes/"+postcode;
+			axios
+		.get(locationurl)
+		.then(res => {					
+			if (res.data.status == 200) { 
+				let {longitude,latitude} = res.data.result   
+				let data={
+					id:id,
+					address:address,
+					postcode:postcode,
+					longitude:longitude,
+					latitude:latitude
+					}                   				
+				locationInfoSubmitStart(dispatch,data);
+			} else {
+				locationInfoSubmitFail(dispatch);	
+			}
+		})
+		.catch(error => {	
+			locationInfoSubmitFail(dispatch);	
+		});
+	}
+	
+};
+const  locationInfoSubmitStart= (dispatch,data) => {	
+	let {id,address,postcode,longitude,latitude}=	data			
+	const	url=ENDPOINT+"function=saveLocation&userId="+id+"&address="+address+"&postcode="+postcode+"&latitude="+latitude+"&longitude="+longitude;
+	axios
+		.get(url)
+		.then(res => {					
+				AlertMessage(res.data.titleMessage,res.data.descMessage)
+			if (res.data.response == "OK") {                            				
+				locationInfoSubmitSuccess(dispatch);					
+			} else {
+				locationInfoSubmitFail(dispatch);				
+			}
+		})
+		.catch(error => {
+			console.log(error);
+			locationInfoSubmitFail(dispatch);
+			
+		});
+};
+
+const locationInfoSubmitFail = (dispatch) => {
+	dispatch({type: EditProfileActionTypes.LOCATION_INFO_SUBMIT_FAIL });
+};
+
+const locationInfoSubmitSuccess = (dispatch) => {	
+	dispatch({type: EditProfileActionTypes.LOCATION_INFO_SUBMIT_SUCCESS });
+};
+export const socialInfoSubmit = (user) => {	
+	return dispatch => {
+		dispatch({ type:EditProfileActionTypes.SOCIAL_INFO_SUBMIT_START });	
+		let {facebook,google,twitter,instagram,website,id}=	user
+		const	url=ENDPOINT+"function=saveSocial&userId="+id+"&facebook="+facebook+"&google="+google+"&twitter="+twitter+"&instagram="+instagram+"&website="+website;
+		axios
+			.get(url)
+			.then(res => {
+					
+					AlertMessage(res.data.titleMessage,res.data.descMessage)
+				if (res.data.response == "OK") {                            				
+					socialInfoSubmitSuccess(dispatch);					
+				} else {
+					socialInfoSubmitFail(dispatch);
+					
+				}
+			})
+			.catch(error => {
+				console.log(error);
+				socialInfoSubmitFail(dispatch);
+				
+			});
+	};
+};
+
+const socialInfoSubmitFail = (dispatch) => {
+	dispatch({type: EditProfileActionTypes.SOCIAL_INFO_SUBMIT_FAIL });
+};
+
+const socialInfoSubmitSuccess = (dispatch) => {	
+	dispatch({type: EditProfileActionTypes.SOCIAL_INFO_SUBMIT_SUCCESS });
+};
+
 const AlertMessage = (title, body) => {
 	Alert.alert(
 		title,

@@ -2,9 +2,14 @@ import Color from "../../styles/colors"
 import {Platform,Dimensions} from 'react-native';
 let {width, height}=Dimensions.get('window');
 export default ({
-		
+	container:{
+		backgroundColor:Color.BACKGROUND_GRAY,
+		width:width,
+		alignItems:'center',
+		justifyContent:'center'
+	},
 	cardTheme:{
-		width:'92%',
+		width:'85%',
 		margin:15,
 		padding:15,
 		borderRadius:20,
@@ -17,6 +22,7 @@ export default ({
 		alignItems:'center'
 	},	
 	subTitle:{
+		marginTop:10,
 		fontSize:25,
 		fontWeight:"bold"		
 	},
@@ -69,8 +75,55 @@ export default ({
 		borderRadius: 25,
 		margin: 20,
 	},
+	changePasswordBtn:{
+		backgroundColor: Color.PRIMARY_COLOR,
+		width: 300,
+		height: 50,
+		justifyContent: "center",
+		alignItems: "center",
+		borderRadius: 25,
+		margin: 20,
+		marginBottom:40
+	},
 	submitTxt:{
 		fontSize:18,
-		color:Color.BACKGROUND_WHITE
-	}
+		color:Color.BACKGROUND_WHITE,
+		fontWeight:"bold"
+	},
+	cancelTxt:{
+		fontSize:18,
+		color:"black",
+		fontWeight:"bold"
+	},
+	orTxt:{
+		fontSize:12,
+		color:"black",
+		fontWeight:"bold",
+		marginBottom: 20,	
+	},
+	inputGrp: {
+		flexDirection: "row",
+		margin: 10
+	 },
+	 input: {
+		paddingLeft: 10,
+		color: "black"
+	 },
+	 formErrorIcon: {
+		color: "black",
+		marginTop: 5,
+		right: 10
+	 },
+	 formErrorText1: {
+		fontSize: Platform.OS === "android" ? 12 : 15,
+		color: "red",
+		textAlign: "right",
+		top: -10
+	 },
+	 formErrorText2: {
+		fontSize: Platform.OS === "android" ? 12 : 15,
+		color: "transparent",
+		textAlign: "right",
+		top: -10
+	 }
 });

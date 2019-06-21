@@ -18,7 +18,20 @@
     Submit:"Submit",
     EditProfile:"Edit Profile",
     SelectCountry:'Select Country',
-    IncorrectPassword:"Incorrect Password"
+    IncorrectPassword:"Incorrect Password",
+    Cancel:"Cancel",
+    OR:"OR",
+    PostCode:"PostCode",
+    Address:"Address",
+    BasicInfo:"Basic Info",
+    Location:"Location",
+    Social:"Social",
+    Website:'Website',
+    Facebook:"Website",
+    Twitter:"Twitter",
+    Instagram:"Instagram",
+    Google:"Google",
+    ChangePassword:"Change Password"
     
 
 }

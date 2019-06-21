@@ -12,7 +12,7 @@ export interface User {
 	postcode:string;
 	website:string;
 	facebook:string;
-	instegram:string;
+	instagram:string;
 	google:string;
 	twitter:string;	
 }

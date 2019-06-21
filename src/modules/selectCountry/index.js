@@ -42,13 +42,15 @@ class CustomCountryPicker extends React.Component<Props> {
       ".png"
     );
   } 
-  renderCheck(item) { 
+  renderCheck(item) {
     let {editData}=this.props  
     if (item.id == editData.user.countryCode)
       return <Icon style={styles.icon} name="md-checkmark" />;
   }
   selectedItem(id){
-    this.props.countryCodeChanged(id)
+    let newUser=this.props.editData.user
+    newUser.countryCode=id;
+    this.props.userInfoChanged(newUser)
     NavigationService.goBack()
   }
   render() {
