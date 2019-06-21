@@ -2,15 +2,19 @@ import { QrDataState } from "./QrDataState";
 import { QrDataActionTypes } from "./QrDataActionTypes";
 const INITIAL_STATE: QrDataState = {
 	QrData: {
-		GivePoints: {
-			descMessage: "",
-			titleMessage: "",
+		GivePoints: {			
+			message:{
+				descMessage: "",
+				titleMessage: ""
+			},
 			qrcodeId: 0,
 			points: 0
 		},
 		ClamimRewards: {
-			descMessage: "",
-			titleMessage: "",
+			message:{
+				descMessage: "",
+				titleMessage: ""
+			},
 			qrcodeId: 0
 		}
 	},
@@ -23,7 +27,6 @@ interface Action {
 	type: string;
 	payload: any;
 }
-
 export const QrDataReducer = (
 	state: QrDataState = INITIAL_STATE,
 	action: Action
@@ -37,13 +40,13 @@ export const QrDataReducer = (
 				errorMessage: ""
 			};
 
-		case QrDataActionTypes.ClamimRewardsSuccess:
+		case QrDataActionTypes.Clamim_Rewards_Success:
 			return {
 				...state,
 				loading: false,
 				QrData: action.payload
 			};
-		case QrDataActionTypes.ClamimRewardsFail:
+		case QrDataActionTypes.Clamim_Rewards_Fail:
 			return {
 				...state,
 				error: true,
@@ -51,13 +54,13 @@ export const QrDataReducer = (
 				errorMessage: action.payload.errorMessage
 			};
 
-		case QrDataActionTypes.GivePointsSuccess:
+		case QrDataActionTypes.Give_Points_Success:
 			return {
 				...state,
 				loading: false,
 				QrData: action.payload
 			};
-		case QrDataActionTypes.GivePointsFail:
+		case QrDataActionTypes.Give_Points_Fail:
 			return {
 				...state,
 				error: true,

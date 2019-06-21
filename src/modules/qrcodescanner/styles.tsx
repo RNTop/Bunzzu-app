@@ -14,7 +14,7 @@ export default ({
         color:Color.BACKGROUND_WHITE,
         fontSize:14,
         marginTop:Platform.OS === 'ios' ? ((height>810||width>810)?40:25): 5,
-        width:'90%',
+        left:10,
         zIndex:100,
         position:'absolute',
         height:25

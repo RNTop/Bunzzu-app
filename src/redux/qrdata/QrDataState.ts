@@ -1,6 +1,9 @@
-import { QrData } from "./../../models/QrData";
+import { GivePoints, ClamimRewards } from "./../../models/QrData";
 export interface QrDataState {
-	QrData: QrData;
+	QrData: {
+		GivePoints:GivePoints;
+		ClamimRewards:ClamimRewards
+	};
 	loading: boolean;
 	error: boolean;
 	errorMessage: string;

@@ -1,13 +1,14 @@
-export interface QrData {	
-	GivePoints: {
-		descMessage : string;
-		titleMessage: string;
-		qrcodeId:number;
-		points:number;
-	};
-	ClamimRewards: {
-		descMessage : string;
-		titleMessage: string;
-		qrcodeId:number;
-	};
+export interface ClamimRewards {
+	message : AlertMessage;
+	qrcodeId:number;
+}
+
+export interface GivePoints {
+	message : AlertMessage;
+	qrcodeId: number;
+	points: number;
+}
+  interface AlertMessage {
+	descMessage : string;
+	titleMessage: string;	
 }

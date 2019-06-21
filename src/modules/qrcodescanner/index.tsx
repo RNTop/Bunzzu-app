@@ -30,8 +30,7 @@ import { bindActionCreators } from 'redux'
 import { ActionCreators } from "../../redux/action.js"
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import NavigationService from '../../navigation/NavigationService'
-const QrcodeInvalidMessage = "This QR code is invalid. Please try again";
-const StepsErrorMessage = "You must fill the points you want to give";
+import Strings from "../../constant/strings"
 class QrcodeScannerPage extends Component {
 	state = {
 		points: null
@@ -48,32 +47,32 @@ class QrcodeScannerPage extends Component {
 			if (ScanType == "givePoints") {
 				if (points != null) {
 					Alert.alert(
-						"Confirmation!",
-						"Are you sure you want to give " + points + " points?",
+						Strings.confirmation,
+						Strings.givepoints_confirm_msg + points + " points?",
 						[{ text: 'YES', onPress: () => this.props.givePointsApiConnect({ qrCodeId, userId, masterId, points }), style: 'ok' },
 						{ text: 'NO', onPress: () => this.restartScanner(), style: 'cancel' }
 						]
 					);
 				} else {
-					this.ErrorAlert(StepsErrorMessage)				
+					this.ErrorAlert(Strings.StepsErrorMessage)				
 				}
 			} else {
 				Alert.alert(
-					"Confirmation!",
-					"Are you sure you want redeem this reward?",
+					Strings.confirmation,
+					Strings.redeem_confirm_msg,
 					[{ text: 'YES', onPress: () => this.props.clamimRewardsApiConnect({ qrCodeId, userId, masterId }), style: 'ok' },
 					{ text: 'NO', onPress: () => this.restartScanner(), style: 'cancel' }
 					]
 				);
 			}
 		} else {
-			this.ErrorAlert(QrcodeInvalidMessage)
+			this.ErrorAlert(Strings.QrcodeInvalidMessage)
 			
 		}
 	}
 	ErrorAlert(body) {
 		Alert.alert(
-			'Note',
+			Strings.note,
 			body,
 			[{ text: 'OK', onPress: () => this.restartScanner(), style: 'ok' }]
 		);
@@ -82,6 +81,14 @@ class QrcodeScannerPage extends Component {
 		let ScanType = this.props.navigation.state.params.ScanType;
 		NavigationService.navigateAndResetWithParams("QrScanner", { ScanType:ScanType});
 	}
+	// customAlertMessage(title,body,YesOnPress,NoOnPress){
+	// 	Alert.alert(
+	// 		title,
+	// 		body,
+	// 		[{ text: 'OK', onPress: () => YesOnPress(), style: 'ok' },
+	// 		 { text: 'NO', onPress: () => NoOnPress(), style: 'no' }]
+	// 	);	
+	// }
 	public render() {
 		let UserInfo = this.props.UserInfo
 		let points = this.state

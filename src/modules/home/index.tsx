@@ -1,65 +1,47 @@
 import React, {
 	Component
 } from "react";
-import {
-	StyleSheet,
+import {	
 	Text,
 	View,
-	Image,
-	Animated,
 	TouchableOpacity,
-	ImageBackground
+    ImageBackground,    
 } from "react-native";
 import {
 	LogoUrl,AppBackgroundImage,ButtonImage
 } from "../../constant/index";
-import {
-	SkypeIndicator,
-	UIActivityIndicator
-} from 'react-native-indicators';
-import {Icon,Content,Card, Thumbnail, Title} from 'native-base'
+import {Icon} from 'native-base'
 import UserModal from "@components/UserModal"
 import Color from "../../styles/colors"
-import { DefaultStyles } from "../../styles/styles"
 import styles from "./styles"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { ActionCreators } from "../../redux/action.js"
-import StorageHelper from "../../helpers/StorageHelper";
-import AsyncStorage from '@react-native-community/async-storage';
-
-class HomePage extends Component {
-    state = {
-
-    };
-    componentDidMount() {
-    
-    }
-    
-    async applogout() {		
-      await AsyncStorage.removeItem(StorageHelper.StorageKeys.UserInfo)
-      this.props.logout();		
-	  }
-    public render() {
+import NavigationService from "../../navigation/NavigationService";
+class HomePage extends Component { 
+   componentDidMount(){
+      
+   }
+   public render() {
        let {username,email,appLogo}=this.props.UserInfo
         return (
             <ImageBackground 
 			 style={styles.container}
 			 source={AppBackgroundImage}			
-			>              
+			>             
             <View style={{flex:2,width:'100%'}}>
                 <Icon   
                 type={"MaterialCommunityIcons"} name={'logout'}           
                 style={styles.logout}
-                onPress={()=>this.applogout()}
+                onPress={()=>this.props.logout()}
                 /> 
             </View>
             <View style={styles.mainContent}>
               <UserModal  
                avatar={appLogo}
                username={username}
-               email={"ivansantiagouk2gmail.com"}  
-               onPress={()=>{alert('here')}}        
+               email={email}  
+               onPress={()=>{NavigationService.navigate("EditProfile")}}        
               />
               <TouchableOpacity 
               style={[styles.cardTheme,{flex:4,justifyContent:'center',alignItems:'center',backgroundColor:Color.PRIMARY_COLOR}]}

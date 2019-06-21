@@ -4,7 +4,7 @@ import { AuthActionTypes } from "./AuthActionTypes";
 import axios from "axios";
 import NavigationService from "../../navigation/NavigationService";
 import StorageHelper from "../../helpers/StorageHelper";
-
+import AsyncStorage from '@react-native-community/async-storage';
 export const loginUser = ({ email, password }) => {
 
 	
@@ -61,6 +61,7 @@ export const autoLogin = (data) => {
 };
 
 export const logout = () => {
+	applogout()
 	NavigationService.navigateAndReset("Login");	
 	return dispatch => {
 		dispatch({
@@ -69,3 +70,8 @@ export const logout = () => {
 		});
 	};
 };
+
+const applogout=async()=> {		
+	await AsyncStorage.removeItem(StorageHelper.StorageKeys.UserInfo)
+			
+}

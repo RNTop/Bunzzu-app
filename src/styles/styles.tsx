@@ -1,7 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 import Color from "./colors";
-
-//styles
+let { width, height } = Dimensions.get('window')
 
 export const DefaultStyles = StyleSheet.create({
   alignCenter: {
@@ -13,6 +12,22 @@ export const DefaultStyles = StyleSheet.create({
     padding: 5,
     backgroundColor: Color.BACKGROUND_COLOR,
     flex: 1
+  },
+  headerstyle: {
+    backgroundColor: Color.PRIMARY_COLOR,
+    height: Platform.OS === 'ios' ? ((height > 810 || width > 810) ? 105 : 80) : 60,
+    paddingTop: Platform.OS === 'ios' ? ((height > 810 || width > 810) ? 65 : 50) : 15,
+    paddingLeft: 15,
+    flexDirection: 'row'
+  },
+  back: {
+    color: Color.BACKGROUND_WHITE,
+    marginRight: 10
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: Color.BACKGROUND_WHITE
   },
   detailCard: {
     padding: 10,
@@ -41,7 +56,7 @@ export const DefaultStyles = StyleSheet.create({
     height: 150,
     width: 150
   },
-  homeLogo: {   
+  homeLogo: {
     height: 150,
     width: 150
   },

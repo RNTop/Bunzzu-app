@@ -4,11 +4,13 @@ const INITIAL_STATE: AuthState = {
 	user: {
 		id: 0,
 		masterId: 0,
+		isMaster:false,
+		email:"",
 		username: "",
 		appLogo: ""
 	},
 	loading: false,
-	error: false,	
+	error: false,
 	errorMessage: ""
 };
 
@@ -35,7 +37,7 @@ export const AuthReducer = (
 				...state,
 				loading: false,
 				loginCompleted: true,
-				user: action.payload
+				user: action.payload.user
 			};
 
 		case AuthActionTypes.LOGIN_USER_FAIL:

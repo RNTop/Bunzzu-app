@@ -1,0 +1,15 @@
+import { User } from "./../../models/Auth";
+import { Country } from "./../../models/Country";
+import {PhoneCode} from "./../../models/PhoneCode"
+export interface EditProfileState {
+    user: User;
+    countries:[Country];
+    phonecodes:[PhoneCode];
+	loading: boolean; 
+	error: boolean;
+    errorMessage: string;
+    isCompleted:boolean;
+    isBasicInfoSubmiting:boolean;
+    isBasicInfoSubmited:boolean
+    
+}
