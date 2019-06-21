@@ -27,7 +27,7 @@
     Location:"Location",
     Social:"Social",
     Website:'Website',
-    Facebook:"Website",
+    Facebook:"Facebook",
     Twitter:"Twitter",
     Instagram:"Instagram",
     Google:"Google",

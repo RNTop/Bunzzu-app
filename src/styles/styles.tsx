@@ -18,14 +18,14 @@ export const DefaultStyles = StyleSheet.create({
     height: Platform.OS === 'ios' ? ((height > 810 || width > 810) ? 105 : 80) : 60,
     paddingTop: Platform.OS === 'ios' ? ((height > 810 || width > 810) ? 65 : 50) : 15,
     paddingLeft: 15,
-    flexDirection: 'row'
+    flexDirection: 'row'    
   },
   back: {
     color: Color.BACKGROUND_WHITE,
     marginRight: 10
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
     color: Color.BACKGROUND_WHITE
   },

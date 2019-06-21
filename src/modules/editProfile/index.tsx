@@ -34,7 +34,7 @@ const maxLength15 = maxLength(15);
 const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined;
 const minLength3 = minLength(3);
-const email = value =>
+const validemail = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? "Invalid email address"
     : undefined;
@@ -42,6 +42,11 @@ const alphaNumeric = value =>
   value && /[^a-zA-Z0-9 ]/i.test(value)
     ? "Only alphanumeric characters"
     : undefined;
+const vaildWebsite=value=>value.includes("http://")?undefined:value.includes("https://")?undefined:"Invaild Website URL";
+const vaildFacebook=value=>value.includes("https://www.facebook.com/")?undefined:"Invaild Facebook URL";
+const vaildInstagram=value=>value.includes("https://www.instagram.com/")?undefined:"Invaild Instagram URL";
+const vaildTwitter=value=>value.includes("https://twitter.com/")?undefined:"Invaild Twitter URL";
+const vaildGoogle=value=>value.includes("https://www.google.com")?undefined:"Invaild Google URL";
 
 
 class EditProfilePage extends Component {
@@ -118,7 +123,7 @@ class EditProfilePage extends Component {
             alert(Strings.IncorrectPassword)
             this.setState({ password: "" })
         } else {
-            this.setState({ password: newpassword })
+            this.setState({ password: newpassword })            
         }
 
     }
@@ -135,16 +140,32 @@ class EditProfilePage extends Component {
         this.props.locationInfoSubmit(user)
 
     }
+    ValidationInput(name,value,isValid){
+        return(
+           <Item  fixedLabel style={{ margin: 10,borderBottomColor:isValid==undefined?"#00000030":"red"}}>
+             <Item floatingLabel>
+                <Label>{name}</Label>
+                <Input
+                    onChangeText={(text) => this.userInfoChanged(name,text)}
+                    value={value}                                    
+                /> 
+             </Item>         
+           {
+           isValid==""?<Text></Text>:<Text style={{position:'absolute',color:'red',bottom:-25,right:0,zIndex:100}}>{isValid}</Text>
+           }
+           </Item>
+        )
+    } 
+    
     public render() {
-        let { user, phonecodes ,isBasicInfoSubmiting,isLocationInfoSubmiting, isSocialInfoSubmiting, isChangePasswordSubmiting} = this.props.editData
-        let { newpassword, confirmpassword, password } = this.state
+        let { user, phonecodes ,isBasicInfoSubmiting,isLocationInfoSubmiting, isSocialInfoSubmiting, isChangePasswordSubmiting} = this.props.editData       
         return (
             <Container>
                 <StatusBar
                     backgroundColor={Color.PRIMARY_COLOR}
                     barStyle='light-content'
                 />
-                <View style={DefaultStyles.headerstyle}>
+                <View  style={DefaultStyles.headerstyle}>
                     <Icon
                         type={"AntDesign"} name={'arrowleft'}
                         style={DefaultStyles.back}
@@ -155,14 +176,8 @@ class EditProfilePage extends Component {
                 <Content>
                     <View style={styles.container}>
                         <View style={styles.cardTheme}>
-                            <Text style={styles.subTitle}>{Strings.BasicInfo}</Text>
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Name}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Name,text)}
-                                    value={user.name}
-                                />
-                            </Item>
+                            <Text style={styles.subTitle}>{Strings.BasicInfo}</Text>                            
+                            {this.ValidationInput(Strings.Name,user.name,minLength3(user.name))}                                                                 
                             <Item style={{ margin: 10 }}>
                                 <Item floatingLabel style={{ width: "25%" }}>
                                     <Label>{Strings.Code}</Label>
@@ -183,17 +198,11 @@ class EditProfilePage extends Component {
                                     <Label>{Strings.Phone}</Label>
                                     <Input
                                         onChangeText={(text) => this.userInfoChanged(Strings.Phone,text)}
-                                        value={user.phone}
+                                        value={user.phone}                                        
                                     />
                                 </Item>
-                            </Item>
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Email}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Email,text)}
-                                    value={user.email}
-                                />
-                            </Item>                        
+                            </Item>                            
+                            {this.ValidationInput(Strings.Email,user.email,validemail(user.email))}                                                 
                             <TouchableOpacity
                                 style={styles.submitBtn}
                                 onPress={() => this.basicInfoSubmitConfirm()}
@@ -206,26 +215,13 @@ class EditProfilePage extends Component {
                             <Text 
                             style={styles.cancelTxt}
                             onPress={() => this.props.EditUserBasicInfo(this.props.UserInfo)}
-                            >{Strings.Cancel}</Text>
-                            
+                            >{Strings.Cancel}</Text>              
 
                         </View>
                         <View style={styles.cardTheme}>
-                            <Text style={styles.subTitle}>{Strings.Location}</Text>
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Address}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Address,text)}
-                                    value={user.address}
-                                />
-                            </Item>                       
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.PostCode}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.PostCode,text)}
-                                    value={user.postcode}
-                                />
-                            </Item>                        
+                            <Text style={styles.subTitle}>{Strings.Location}</Text>                   
+                            {this.ValidationInput(Strings.Address,user.address,minLength3(user.address))}
+                            {this.ValidationInput(Strings.PostCode,user.postcode,required(user.postcode))}    
                             <TouchableOpacity
                                 style={styles.submitBtn}
                                 onPress={() => this.locationInfoSubmitConfirm()}
@@ -242,42 +238,12 @@ class EditProfilePage extends Component {
 
                         </View>
                         <View style={styles.cardTheme}>
-                            <Text style={styles.subTitle}>{Strings.Social}</Text>
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Website}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Website,text)}
-                                    value={user.website}
-                                />
-                            </Item>                       
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Facebook}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Facebook,text)}
-                                    value={user.facebook}
-                                />
-                            </Item>
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Twitter}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Twitter,text)}
-                                    value={user.twitter}
-                                />
-                            </Item>                       
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Instagram}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Instagram,text)}
-                                    value={user.instagram}
-                                />
-                            </Item> 
-                            <Item floatingLabel style={{ margin: 10 }}>
-                                <Label>{Strings.Google}</Label>
-                                <Input
-                                    onChangeText={(text) => this.userInfoChanged(Strings.Google,text)}
-                                    value={user.google}
-                                />
-                            </Item>                        
+                            <Text style={styles.subTitle}>{Strings.Social}</Text>                         
+                            {this.ValidationInput(Strings.Website,user.website,vaildWebsite(user.website))} 
+                            {this.ValidationInput(Strings.Facebook,user.facebook,vaildFacebook(user.facebook))} 
+                            {this.ValidationInput(Strings.Twitter,user.twitter,vaildTwitter(user.twitter))} 
+                            {this.ValidationInput(Strings.Instagram,user.instagram,vaildInstagram(user.instagram))} 
+                            {this.ValidationInput(Strings.Google,user.google,vaildGoogle(user.google))}              
                             <TouchableOpacity
                                 style={styles.submitBtn}
                                 onPress={() => this.socialInfoSubmitConfirm()}

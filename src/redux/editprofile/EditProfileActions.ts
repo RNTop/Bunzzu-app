@@ -50,7 +50,8 @@ const EditUserBasicInfoSuccess = (dispatch, data) => {
 		payload: data
 	});
 };
-export const userInfoChanged = (newuser) => {		
+export const userInfoChanged = (newuser) => {
+	
 	return dispatch => {
 		dispatch({ 
             type:EditProfileActionTypes.EDIT_USER_INFO_CHANGED ,
