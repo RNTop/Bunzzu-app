@@ -49,8 +49,10 @@ class CustomCountryPicker extends React.Component<Props> {
   }
   selectedItem(id){
     let newUser=this.props.editData.user
+    let NewInitStatus=this.props.editData.initStatus
+    NewInitStatus.basic=false;
     newUser.countryCode=id;
-    this.props.userInfoChanged(newUser)
+    this.props.userInfoChanged(newUserInfo,NewInitStatus)
     NavigationService.goBack()
   }
   render() {

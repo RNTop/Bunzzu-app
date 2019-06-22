@@ -40,7 +40,12 @@ const INITIAL_STATE: EditProfileState = {
 	loading: false,
 	error: false,
     errorMessage: "",
-    isCompleted:false,   
+    isCompleted:false, 
+    initStatus:{
+        basic:true,
+        location:true,
+        social:true
+    },  
     isBasicInfoSubmiting:false ,
     isBasicInfoSubmited:false,
 
@@ -53,7 +58,7 @@ const INITIAL_STATE: EditProfileState = {
     isChangePasswordSubmiting:false,
     isChangePasswordSubmited:false,
 };
-
+let  newInitStatus=null;
 interface Action {
 	type: string;
 	payload: any;
@@ -76,7 +81,12 @@ export const EditProfileReducer = (
 			return {
 				...state,
 				loading: false,
-				isCompleted: true,
+                isCompleted: true,
+                initStatus:{
+                    basic:true,
+                    location:true,
+                    social:true
+                }, 
                 user: action.payload.user,
                 countries:action.payload.countries,
                 phonecodes:action.payload.phonecodes
@@ -90,10 +100,12 @@ export const EditProfileReducer = (
                 isCompleted:false,
 				errorMessage: action.payload.errorMessage
             };
-        case EditProfileActionTypes.EDIT_USER_INFO_CHANGED:             
+        case EditProfileActionTypes.EDIT_USER_INFO_CHANGED: 
+
             return {
                 ...state,
-                user:action.payload
+                initStatus:action.payload.initStatus,
+                user:action.payload.data
                 };        
         case EditProfileActionTypes.BASIC_INFO_SUBMIT_START:         
             return {
@@ -101,11 +113,14 @@ export const EditProfileReducer = (
             isBasicInfoSubmited:false,
             isBasicInfoSubmiting:true
             };
-        case EditProfileActionTypes.BASIC_INFO_SUBMIT_SUCCESS:         
+        case EditProfileActionTypes.BASIC_INFO_SUBMIT_SUCCESS:
+            newInitStatus=state.initStatus 
+            newInitStatus.basic=true        
             return {
             ...state,
             isBasicInfoSubmiting:false,
-            isBasicInfoSubmited:true
+            isBasicInfoSubmited:true,
+            initStatus:newInitStatus
             }; 
         case EditProfileActionTypes.BASIC_INFO_SUBMIT_FAIL:         
             return {
@@ -119,11 +134,14 @@ export const EditProfileReducer = (
             isLocationInfoSubmiting:true,
             isLocationInfoSubmited:false
         }; 
-        case EditProfileActionTypes.LOCATION_INFO_SUBMIT_SUCCESS:         
+        case EditProfileActionTypes.LOCATION_INFO_SUBMIT_SUCCESS:
+            newInitStatus=state.initStatus 
+            newInitStatus.location=true             
             return {
             ...state,
             isLocationInfoSubmiting:false,
-            isLocationInfoSubmited:true
+            isLocationInfoSubmited:true,
+            initStatus:newInitStatus
             }; 
         case EditProfileActionTypes.LOCATION_INFO_SUBMIT_FAIL:         
             return {
@@ -137,11 +155,14 @@ export const EditProfileReducer = (
             isSocialInfoSubmiting:true,
             isSocialInfoSubmited:false
         }; 
-        case EditProfileActionTypes.SOCIAL_INFO_SUBMIT_SUCCESS:         
+        case EditProfileActionTypes.SOCIAL_INFO_SUBMIT_SUCCESS:  
+            newInitStatus=state.initStatus 
+            newInitStatus.social=true          
             return {
             ...state,
             isSocialInfoSubmiting:false,
-            isSocialInfoSubmited:true
+            isSocialInfoSubmited:true,
+            initStatus:newInitStatus
             }; 
         case EditProfileActionTypes.SOCIAL_INFO_SUBMIT_FAIL:         
             return {

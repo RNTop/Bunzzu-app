@@ -9,6 +9,11 @@ export interface EditProfileState {
 	error: boolean;
     errorMessage: string;
     isCompleted:boolean;
+    initStatus:{
+        basic:boolean;
+        location:boolean;
+        social:boolean;
+    };
 
     isBasicInfoSubmiting:boolean;
     isBasicInfoSubmited:boolean;

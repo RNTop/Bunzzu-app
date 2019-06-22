@@ -9,10 +9,10 @@ export default ({
 		justifyContent:'center'
 	},
 	cardTheme:{
-		width:'85%',
-		margin:15,
-		padding:15,
-		borderRadius:20,
+		width:'95%',
+		margin:10,
+		padding:10,
+		borderRadius:5,
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.5,
@@ -21,10 +21,13 @@ export default ({
 		backgroundColor:'white',
 		alignItems:'center'
 	},	
-	subTitle:{
+	subTitle:{		
 		marginTop:10,
-		fontSize:25,
-		fontWeight:"bold"		
+		fontSize:20,
+		fontWeight:"bold",
+		width:'100%',
+		textAlign:"left",	
+		color:Color.PRIMARY_COLOR	
 	},
 	containerImage: {
 		flex: 1,
@@ -46,14 +49,19 @@ export default ({
 	 modal: {
 		justifyContent: "center",
 		alignItems: "center",
-		borderRadius:10,
-		borderWidth:1,
-		borderColor:Color.BACKGROUND_GRAY
+		flex:1,
+		backgroundColor: "#00000070",
 	 },
 	 modal1: {
 		height: 270,
 		width:300,
-		padding:20
+		padding:20,
+		borderRadius:10,
+		borderWidth:1,
+		borderColor:Color.BACKGROUND_GRAY,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: Color.BACKGROUND_WHITE,
 	 },
 	 modal2: {
 		height: height - 78,
@@ -73,7 +81,7 @@ export default ({
 		justifyContent: "center",
 		alignItems: "center",
 		borderRadius: 25,
-		margin: 20,
+		marginTop: 20,
 	},
 	changePasswordBtn:{
 		backgroundColor: Color.PRIMARY_COLOR,
@@ -85,6 +93,14 @@ export default ({
 		margin: 20,
 		marginBottom:40
 	},
+	invalidTxt:{
+		position:'absolute',
+		color:'red',
+		bottom:-15,
+		right:0,
+		zIndex:100,
+		fontSize:10
+	},
 	submitTxt:{
 		fontSize:18,
 		color:Color.BACKGROUND_WHITE,
@@ -95,11 +111,16 @@ export default ({
 		color:"black",
 		fontWeight:"bold"
 	},
+	cancelNav:{
+		width:'100%',
+		alignItems:'center',
+		justifyContent:'center'
+	},
 	orTxt:{
 		fontSize:12,
 		color:"black",
 		fontWeight:"bold",
-		marginBottom: 20,	
+		margin: 15,	
 	},
 	inputGrp: {
 		flexDirection: "row",
